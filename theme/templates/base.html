@@ -1,0 +1,56 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %} - DjangoSearch</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% tailwind_css %}
+</head>
+<body>
+    <div id="content flex flex-col">
+      <h1 class="text-9xl text-center pt-20 pb-10">Phonebook</h1>
+      
+      
+      <div class="flex flex-col rounded-xl border m-10 p-10 border-neutral-500 h-full overflow-auto">
+
+        
+        <form action="." method="POST" class="mb-5 border rounded-xl p-3 w-max border-black">
+          {% csrf_token %}
+            <input name="search_term" type="text" id="searchInput" class="appearance-none border-none focus:border-none">
+            <button type="submit" class="px-5 py-2">Submit</button>
+        </form>
+
+
+
+
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-left text-sm font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                  <tr>
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">Name</th>
+                    <th scope="col" class="px-6 py-4">Contact Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in contacts %}
+                  <tr class="border-b dark:border-neutral-500">
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">{{ item.id }}</td>
+                    <td class="whitespace-nowrap px-6 py-4">{{ item.name }}</td>
+                    <td class="whitespace-nowrap px-6 py-4">{{ item.number }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+</body>
+</html>
